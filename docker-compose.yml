@@ -1,0 +1,16 @@
+version: '3.2'
+
+services:
+  test-localtunnel: 
+    build: .
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      LT_PORT: 1200
+      LT_SUBDOMAIN: anjay
+    healthcheck:
+      test: ["CMD", "curl", "anjay.loca.lt"]
+      interval: 1s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
